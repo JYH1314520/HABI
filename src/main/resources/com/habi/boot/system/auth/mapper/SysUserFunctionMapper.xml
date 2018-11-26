@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.habi.boot.system.auth.mapper.SysUserFunctionMapper">
+    <resultMap id="BaseResultMap" type="com.habi.boot.system.auth.entity.SysUserFunctionEntity" extends="com.habi.boot.system.base.mapper.StdMapper.STD">
+    </resultMap>
+    <resultMap id="findByUserNameResultMap" type="com.habi.boot.system.auth.entity.SysFunctionEntity" extends="BaseResultMap">
+    </resultMap>
+    <select id="findByUserName"  resultMap="findByUserNameResultMap"   parameterType="java.lang.String">
+           select srf.*,
+                    sf.function_code,
+                    sf.function_type,
+                    sf.function_description,
+                    sf.function_icon,
+                    sf.function_sequence,
+                    sf.function_name,
+                    sf.module_code,
+                    sf.parent_function_id,
+                    sf.resource_name,
+                    sf.resource_id
+from sys_user_function srf
+join sys_function  sf
+    on sf.function_id=srf.function_id
+join sys_user  su
+    on su.user_id=srf.user_id
+     WHERE su.user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+</mapper>
