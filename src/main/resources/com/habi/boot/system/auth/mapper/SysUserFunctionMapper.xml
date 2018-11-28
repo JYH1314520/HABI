@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.habi.boot.system.auth.mapper.SysUserFunctionMapper">
-    <resultMap id="BaseResultMap" type="com.habi.boot.system.auth.entity.SysUserFunctionEntity" extends="com.habi.boot.system.base.mapper.StdMapper.STD">
+    <resultMap id="BaseResultMap" type="com.habi.boot.system.auth.entity.SysUserFunctionEntity" extends="com.habi.boot.system.base.stdmapper.StdMapper.STD">
     </resultMap>
     <resultMap id="findByUserNameResultMap" type="com.habi.boot.system.auth.entity.SysFunctionEntity" extends="BaseResultMap">
     </resultMap>

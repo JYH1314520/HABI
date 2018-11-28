@@ -1,4 +1,4 @@
-package com.habi.boot.system.base.mapper;
+package com.habi.boot.system.base.stdmapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

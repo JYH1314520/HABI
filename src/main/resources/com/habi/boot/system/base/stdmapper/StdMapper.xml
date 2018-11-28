@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.srm.core.base.mapper.StdMapper">
+<mapper namespace="com.habi.boot.system.base.stdmapper.StdMapper">
     <resultMap id="STD" type="com.habi.boot.system.base.BaseEntity">
         <result column="OBJECT_VERSION_NUMBER" property="objectVersionNumber" jdbcType="DECIMAL"/>
         <result column="REQUEST_ID" property="requestId" jdbcType="DECIMAL"/>

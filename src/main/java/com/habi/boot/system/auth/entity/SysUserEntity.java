@@ -1,22 +1,21 @@
 package com.habi.boot.system.auth.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.habi.boot.system.base.BaseEntity;
 
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 
-@TableName("sys_user")
+@Table(name = "sys_user")
 public class SysUserEntity extends BaseEntity {
     @Id
-    @TableId
     private Long userId;  //pk
 
     @NotNull

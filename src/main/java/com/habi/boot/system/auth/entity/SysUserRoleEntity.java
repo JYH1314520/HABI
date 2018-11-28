@@ -1,16 +1,14 @@
 package com.habi.boot.system.auth.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 import com.habi.boot.system.base.BaseEntity;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@TableName("sys_user_role")
+@Table(name = "sys_user_role")
 public class SysUserRoleEntity extends BaseEntity {
     @Id
-    @TableId
     private Long surId;
 
     private Long userId;

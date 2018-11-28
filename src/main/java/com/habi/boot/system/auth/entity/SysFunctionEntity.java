@@ -1,6 +1,6 @@
 package com.habi.boot.system.auth.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
+
 import com.habi.boot.system.base.BaseEntity;
 
 import javax.persistence.Id;
@@ -9,7 +9,6 @@ import javax.persistence.Table;
 @Table(name = "sys_function")
 public class SysFunctionEntity extends BaseEntity {
     @Id
-    @TableId
     private Long funcitonId;
 
     private String functionCode;

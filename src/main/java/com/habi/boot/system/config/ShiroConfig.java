@@ -1,7 +1,7 @@
 package com.habi.boot.system.config;
 
 
-import com.habi.boot.system.handler.MyExceptionHandler;
+//import com.habi.boot.system.handler.MyExceptionHandler;
 import com.habi.boot.system.manager.MySessionManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -47,6 +47,7 @@ public class ShiroConfig {
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
+        filterChainDefinitionMap.put("/sys/role/*", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
@@ -162,9 +163,9 @@ public class ShiroConfig {
      * 注册全局异常处理
      * @return
      */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return new MyExceptionHandler();
-    }
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//        return new MyExceptionHandler();
+//    }
 }
 
