@@ -15,6 +15,16 @@ public class ResponseData {
     private boolean success;
     @JsonInclude(Include.NON_NULL)
     private Long total;
+    @JsonInclude(Include.NON_NULL)
+    private String sessionId;
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public ResponseData() {
         this.success = true;

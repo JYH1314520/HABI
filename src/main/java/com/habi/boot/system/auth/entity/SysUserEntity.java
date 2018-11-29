@@ -4,10 +4,8 @@ package com.habi.boot.system.auth.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.habi.boot.system.base.BaseEntity;
 
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +34,7 @@ public class SysUserEntity extends BaseEntity {
 
     private Date endActiveDate;   //有效日期至
 
-    private Integer status ;   //状态 :  0 正常  1 冻结
+    private String status ;   //状态 :
 
     private Long employeeId;  //员工id
 
@@ -86,6 +84,10 @@ public class SysUserEntity extends BaseEntity {
 
     @Transient
     private List<String> roleCode;
+
+//    @ManyToMany(fetch= FetchType.EAGER)//立即从数据库中进行加载数据;
+//    @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
+//    private List<SysRoleEntity> roleList;// 一个用户具有多个角色
 
 
 
@@ -162,11 +164,11 @@ public class SysUserEntity extends BaseEntity {
         this.endActiveDate = endActiveDate;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

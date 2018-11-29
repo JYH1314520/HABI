@@ -26,6 +26,8 @@ public class SysRoleController extends BaseController {
         IRequest requestContext = this.createRequestContext(request);
          SysRoleEntity sysRoleEntity =  new SysRoleEntity();
         sysRoleEntity.setRoleCode("223333");
+        sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
+        sysRoleEntity.setRoleName("233333");
         sysRoleService.insert(requestContext,sysRoleEntity );
         return  new ResponseData() ;
     };

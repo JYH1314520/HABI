@@ -94,11 +94,11 @@ public class MyShiroRealm extends AuthorizingRealm {
         if (sysUserEntity == null) {
             return null;
         }
-        if (sysUserEntity.getStatus() == 1) { //账户冻结
+        if (sysUserEntity.getStatus() == "") { //账户冻结
             throw new LockedAccountException();
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                sysUserEntity, //用户名
+                sysUserEntity.getUserName(), //用户名
                 sysUserEntity.getPassword(), //密码
                 ByteSource.Util.bytes(sysUserEntity.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name

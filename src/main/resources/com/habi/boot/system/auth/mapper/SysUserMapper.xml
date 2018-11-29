@@ -4,9 +4,7 @@
     <resultMap id="BaseResultMap" type="com.habi.boot.system.auth.entity.SysUserEntity" extends="com.habi.boot.system.base.stdmapper.StdMapper.STD">
         <id column="USER_ID" property="userId" jdbcType="DECIMAL" />
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
-        <result column="USER_NAME" property="username" jdbcType="VARCHAR" />
         <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
-        <result column="PASSWORD_ENCRYPTED" property="passwordEncrypted" jdbcType="VARCHAR" />
         <result column="PASSWORD_ENCRYPTED" property="password" jdbcType="VARCHAR" />
         <result column="EMAIL" property="email" jdbcType="VARCHAR" />
         <result column="PHONE" property="phone" jdbcType="VARCHAR" />

@@ -1,16 +1,19 @@
 package com.habi.boot.system.config;
 
 
-//import com.habi.boot.system.handler.MyExceptionHandler;
+import com.habi.boot.system.handler.MyExceptionHandler;
 import com.habi.boot.system.manager.MySessionManager;
+import com.habi.boot.system.manager.RedisManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.crazycake.shiro.RedisCacheManager;
-import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +36,8 @@ public class ShiroConfig {
     private int timeout;
     @Value("${spring.redis.shiro.password}")
     private String password;
+    @Value("${spring.redis.shiro.database}")
+    private int database;
 
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
@@ -47,7 +52,6 @@ public class ShiroConfig {
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
-        filterChainDefinitionMap.put("/sys/role/*", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
@@ -116,6 +120,7 @@ public class ShiroConfig {
         redisManager.setExpire(1800);// 配置缓存过期时间
         redisManager.setTimeout(timeout);
         redisManager.setPassword(password);
+        redisManager.setDatabase(database);
         return redisManager;
     }
 
@@ -146,6 +151,29 @@ public class ShiroConfig {
     }
 
     /**
+     * 3.此处对应前端“记住我”的功能，获取用户关联信息而无需登录
+     * @return
+     */
+    @Bean
+    public SimpleCookie rememberMeCookie(){
+        //这个参数是cookie的名称，对应前端的checkbox的name = remember
+        SimpleCookie simpleCookie = new SimpleCookie("remember");
+        //<!-- 记住我cookie生效时间30天 ,单位秒;-->
+        simpleCookie.setMaxAge(259200);
+        return simpleCookie;
+    }
+
+    @Bean
+    public CookieRememberMeManager rememberMeManager(){
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+        cookieRememberMeManager.setCipherKey(Base64.decode("one"));
+        return cookieRememberMeManager;
+    }
+
+
+    /**
      * 开启shiro aop注解支持.
      * 使用代理方式;所以需要开启代码支持;
      *
@@ -163,9 +191,9 @@ public class ShiroConfig {
      * 注册全局异常处理
      * @return
      */
-//    @Bean(name = "exceptionHandler")
-//    public HandlerExceptionResolver handlerExceptionResolver() {
-//        return new MyExceptionHandler();
-//    }
+    @Bean(name = "exceptionHandler")
+    public HandlerExceptionResolver handlerExceptionResolver() {
+        return new MyExceptionHandler();
+    }
 }
 
