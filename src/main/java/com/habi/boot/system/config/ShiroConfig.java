@@ -48,6 +48,21 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //注意过滤器配置顺序 不能颠倒
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了，登出后跳转配置的loginUrl
+        //配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
+        /**
+         * anon（匿名）  org.apache.shiro.web.filter.authc.AnonymousFilter
+         * authc（身份验证）       org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+         * authcBasic（http基本验证）    org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter
+         * logout（退出）        org.apache.shiro.web.filter.authc.LogoutFilter
+         * noSessionCreation（不创建session） org.apache.shiro.web.filter.session.NoSessionCreationFilter
+         * perms(许可验证)  org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
+         * port（端口验证）   org.apache.shiro.web.filter.authz.PortFilter
+         * rest  (rest方面)  org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter
+         * roles（权限验证）  org.apache.shiro.web.filter.authz.RolesAuthorizationFilter
+         * ssl （ssl方面）   org.apache.shiro.web.filter.authz.SslFilter
+         * member （用户方面）  org.apache.shiro.web.filter.authc.UserFilter
+         * user  表示用户不一定已通过认证,只要曾被Shiro记住过登录状态的用户就可以正常发起请求,比如rememberMe
+         */
         filterChainDefinitionMap.put("/logout", "logout");
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -71,18 +86,18 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
-        return hashedCredentialsMatcher;
-    }
+//    @Bean
+//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+//        hashedCredentialsMatcher.setHashAlgorithmName("MD5");//散列算法:这里使用MD5算法;
+//        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+//        return hashedCredentialsMatcher;
+//    }
 
     @Bean
     public MyShiroRealm myShiroRealm() {
         MyShiroRealm myShiroRealm = new MyShiroRealm();
-        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+//        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return myShiroRealm;
     }
 
