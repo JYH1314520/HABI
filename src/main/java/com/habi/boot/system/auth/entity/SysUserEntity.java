@@ -3,6 +3,8 @@ package com.habi.boot.system.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.habi.boot.system.base.BaseEntity;
+import com.habi.boot.system.base.annotation.TableGeneratedValue;
+import com.habi.boot.system.config.DatabaseTypeConfig;
 
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ import java.util.List;
 @Table(name = "sys_user")
 public class SysUserEntity extends BaseEntity {
     @Id
+    @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long userId;  //pk
 
     @NotNull
@@ -57,6 +61,7 @@ public class SysUserEntity extends BaseEntity {
     public Boolean getUserpermissionflag() {
         return userpermissionflag;
     }
+
 
     public void setUserpermissionflag(Boolean userpermissionflag) {
         this.userpermissionflag = userpermissionflag;

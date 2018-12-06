@@ -1,14 +1,16 @@
 package com.habi.boot.system.auth.entity;
 
 import com.habi.boot.system.base.BaseEntity;
+import com.habi.boot.system.base.annotation.TableGeneratedValue;
+import com.habi.boot.system.config.DatabaseTypeConfig;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Table(name = "sys_user_role")
 public class SysUserRoleEntity extends BaseEntity {
     @Id
+    @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long surId;
 
     private Long userId;

@@ -1,5 +1,7 @@
 package com.habi.boot.system.base.mapper;
 
 
-public interface Mapper<T> extends tk.mybatis.mapper.common.Mapper<T>{
+import com.habi.boot.system.base.mybatis.MyMapper;
+
+public interface Mapper<T> extends MyMapper<T> {
 }

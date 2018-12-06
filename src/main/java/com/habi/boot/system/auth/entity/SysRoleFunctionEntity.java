@@ -2,16 +2,17 @@ package com.habi.boot.system.auth.entity;
 
 
 import com.habi.boot.system.base.BaseEntity;
+import com.habi.boot.system.base.annotation.TableGeneratedValue;
+import com.habi.boot.system.config.DatabaseTypeConfig;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.List;
 
 @Table(name = "sys_role_function")
 public class SysRoleFunctionEntity extends BaseEntity {
     @Id
-
+    @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long roleFuncitonId;
 
     private Long functionId;

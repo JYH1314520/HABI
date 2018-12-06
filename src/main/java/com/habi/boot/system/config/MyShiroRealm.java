@@ -98,6 +98,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         if (sysUserEntity.getStatus() == "") { //账户冻结
             throw new LockedAccountException();
         }
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 sysUserEntity.getUserName(), //用户名
                 sysUserEntity.getPassword(), //密码

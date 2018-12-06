@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8888
 
 
 spring:
@@ -9,9 +9,6 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
-  jpa:
-    hibernate:
-      ddl-auto: update
   aop:
     auto: true
   redis:
@@ -25,11 +22,13 @@ spring:
 #数据源
   dataSource:
     name: test
-    url: jdbc:mysql://127.0.0.1:3306/boot?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF8
-    username: root
-    password: root
+    #url: jdbc:mysql://127.0.0.1:3306/boot?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF8
+    url: jdbc:oracle:thin:@192.168.0.133:1521:orcl
+    username: hap
+    password: hap
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: oracle.jdbc.OracleDriver
     filters: stat
     maxActive: 20
     initialSize: 1
@@ -37,7 +36,8 @@ spring:
     minIdle: 1
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
+    validationQuery: select 'x' from dual
+    #validationQuery: select 'x'  #MYSQL
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
@@ -54,7 +54,8 @@ spring:
       max-active: 50
       min-idle: 5
       max-wait: 6000
-      validation-query: SELECT 'x'
+      #validation-query: select 'x' #MYSQL
+      validation-query: select 'x' from dual
       test-on-borrow: true
       test-on-return: true
       test-while-idle: true
@@ -73,52 +74,25 @@ spring:
         reset-enable: false
         login-username: admin
         login-password: 123456
-       #数据源1 业务数据
-      datasource1:
-        url: jdbc:mysql://localhost:3306/boot?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF8
-        username: root
-        password: root
-        driverClassName: com.mysql.jdbc.Driver
-      #shiro数据源，用于权限相关
-      shiroDataSource:
-        #MyISAM和InnoDB是两种最常用的数据库引擎，默认的引擎是MyISAM，性能最好，但不支持事务处理，只有InnoDB支持事务
-        url: jdbc:mysql://localhost:3306/boot?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF8
-        username: root
-        password: root
-        driverClassName: com.mysql.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 mybatis:
   mapper-locations: classpath*:/**/*Mapper.xml
   type-aliases-package: com.habi.**.entity
-  configuration:
-      map-underscore-to-camel-case: true
+  config-location: classpath:mybatis-config.xml
 
 pagehelper:
-    helperDialect: mysql
+    #helperDialect: mysql
+    helperDialect: oracle
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
-mapper:
-  identity: MYSQL
 
-globalConfig1:
-    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
-  idType: 0
-    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
-  fieldStrategy: 2
-    #驼峰下划线转换
-  dbColumnUnderline: true
-    #刷新mapper 调试神器
-  refreshMapper: true
 
-globalConfigShrio:
-    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
-  idType: 3
-    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
-  fieldStrategy: 2
-    #驼峰下划线转换
-  dbColumnUnderline: true
-    #刷新mapper 调试神器
-  refreshMapper: true
+
 
 

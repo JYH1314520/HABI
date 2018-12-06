@@ -2,13 +2,19 @@ package com.habi.boot.system.auth.entity;
 
 
 import com.habi.boot.system.base.BaseEntity;
+import com.habi.boot.system.base.annotation.TableGeneratedValue;
+import com.habi.boot.system.config.DatabaseTypeConfig;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "sys_function")
 public class SysFunctionEntity extends BaseEntity {
     @Id
+    @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long funcitonId;
 
     private String functionCode;

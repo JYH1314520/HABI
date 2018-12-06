@@ -21,14 +21,30 @@ public class SysRoleController extends BaseController {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
+    @RequestMapping("/select")
+    public ResponseData select(HttpServletRequest request){
+        return  new ResponseData(sysRoleService.findAll()) ;
+    };
+
     @RequestMapping("/insert")
     public ResponseData insert(HttpServletRequest request){
         IRequest requestContext = this.createRequestContext(request);
          SysRoleEntity sysRoleEntity =  new SysRoleEntity();
         sysRoleEntity.setRoleCode("223333");
-        sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
+       // sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
         sysRoleEntity.setRoleName("233333");
         sysRoleService.insert(requestContext,sysRoleEntity );
+        return  new ResponseData() ;
+    };
+    @RequestMapping("/upate")
+    public ResponseData upate(HttpServletRequest request){
+        IRequest requestContext = this.createRequestContext(request);
+        SysRoleEntity sysRoleEntity =  new SysRoleEntity();
+        sysRoleEntity.setRoleId(Integer.valueOf(1).longValue());
+        sysRoleEntity.setRoleCode("223333");
+        // sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
+        sysRoleEntity.setRoleName("nihoa");
+        sysRoleService.updateByPrimaryKey(requestContext,sysRoleEntity );
         return  new ResponseData() ;
     };
 }
