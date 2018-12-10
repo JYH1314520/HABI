@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.habi.boot.system.base.IRequest;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ServiceRequest implements IRequest {
     private static final String ATTR_USER_ID = "_userId";
@@ -19,10 +16,12 @@ public class ServiceRequest implements IRequest {
     private Long userId = -1L;
     private Long roleId = -1L;
     private Long[] roleIds = new Long[0];
+
     private Long companyId = -1L;
     private String locale = Locale.getDefault().toString();
     private String employeeCode;
     private String userName;
+    private List<String> roleCode;
     @JsonIgnore
     private Map<String, Object> attributeMap = new HashMap();
 
@@ -87,6 +86,14 @@ public class ServiceRequest implements IRequest {
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
         this.setAttribute("_companyId", companyId);
+    }
+
+    public List<String> getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(List<String> roleCode) {
+        this.roleCode = roleCode;
     }
 
     @JsonAnyGetter

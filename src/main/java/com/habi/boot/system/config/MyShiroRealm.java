@@ -105,9 +105,9 @@ public class MyShiroRealm extends AuthorizingRealm {
                 //"admin",
                 getName()  //realm name
         );
-        if (sysUserEntity.getSalt() != null){
-            authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(sysUserEntity.getCredentialsSalt()));
-        }
+//        if (sysUserEntity.getSalt() != null){
+//            authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(sysUserEntity.getCredentialsSalt()));
+//        }
         return authenticationInfo;
     }
 

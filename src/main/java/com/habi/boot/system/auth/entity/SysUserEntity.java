@@ -209,4 +209,8 @@ public class SysUserEntity extends BaseEntity {
     public String getCredentialsSalt() {
         return this.userName + this.salt;
     }
+
+    public  SysUserEntity(){
+
+    }
 }

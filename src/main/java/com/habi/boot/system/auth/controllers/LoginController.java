@@ -4,6 +4,7 @@ import com.habi.boot.system.auth.entity.SysUserEntity;
 import com.habi.boot.system.auth.service.ISysUserService;
 import com.habi.boot.system.base.BaseController;
 import com.habi.boot.system.base.ResponseData;
+import com.habi.boot.system.logs.annotation.SysLog;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import static com.alibaba.druid.util.Utils.md5;
 
 @RestController
@@ -60,6 +63,7 @@ public class LoginController extends BaseController {
         }
         SysUserEntity sysUserEntity = sysUserService.selectByUserName(userName);
         subject.getSession().setAttribute("user", sysUserEntity);
+        request.getSession().setAttribute("user",sysUserEntity);
         String sessionId = (String) subject.getSession().getId();
         ResponseData responseData =   new ResponseData();
         responseData.setSuccess(true);
@@ -89,6 +93,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/logout")
     @ResponseBody
+    @SysLog("退出系统")
     public ResponseData logout(HttpServletRequest request) throws Exception {
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();

@@ -1,6 +1,7 @@
 package com.habi.boot.system.base;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,4 +49,8 @@ public interface IRequest extends Serializable {
     void setLocale(String var1);
 
     void setRoleId(Long var1);
+
+     List<String> getRoleCode();
+
+    void setRoleCode(List<String> roleCode);
 }
