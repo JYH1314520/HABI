@@ -1,5 +1,7 @@
 package com.habi.boot.system.initMethod;
 
+import com.habi.boot.system.base.cache.impl.HashStringRedisCache;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -16,6 +18,7 @@ public class bootApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         System.out.println("APP启动");
+
     }
 
 }

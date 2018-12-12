@@ -12,12 +12,10 @@ spring:
   aop:
     auto: true
   redis:
-    shiro:
-      host: 127.0.0.1
-      port: 6379
-      database: 6
-      timeout: 0
-      password:
+    host: 127.0.0.1
+    database: 2
+    port: 6379
+    password:
 
 #数据源
   dataSource:
@@ -92,7 +90,13 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 
-
+shiro:
+   redis:
+     host: 127.0.0.1
+     database: 6
+     port: 6379
+     password:
+     timeout: 0
 
 
 

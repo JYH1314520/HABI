@@ -49,6 +49,18 @@ public class RedisManager extends  org.crazycake.shiro.RedisManager{
         return value;
     }
 
+    public static Jedis getJedis() {
+        return jedisPool.getResource();
+    }
+
+    public static void closeJedis(Jedis jedis) {
+        if (jedis != null) {
+            jedis.close();
+        }
+    }
+
+
+
     public byte[] set(byte[] key, byte[] value) {
         Jedis jedis = (Jedis)jedisPool.getResource();
 

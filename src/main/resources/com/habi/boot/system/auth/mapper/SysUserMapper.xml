@@ -45,4 +45,15 @@
         LEFT OUTER JOIN HR_EMPLOYEE HE ON SU.EMPLOYEE_ID = HE.EMPLOYEE_ID
         WHERE USER_NAME = #{userName,jdbcType=VARCHAR}
     </select>
+    <select id="selectUserForCache" resultMap="UserResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" />,
+        SU.EMPLOYEE_ID,
+        SR.ROLE_CODE,
+        HE.EMPLOYEE_CODE AS EMPLOYEE_CODE,
+        HE.NAME AS EMPLOYEE_NAME
+        FROM SYS_USER SU
+        LEFT OUTER JOIN SYS_USER_ROLE SUR ON SU.USER_ID = SUR.USER_ID
+        LEFT OUTER JOIN SYS_ROLE_B SR ON SR.ROLE_ID = SUR.ROLE_ID AND SR.ENABLE_FLAG = 'Y'
+        LEFT OUTER JOIN HR_EMPLOYEE HE ON SU.EMPLOYEE_ID = HE.EMPLOYEE_ID
+    </select>
 </mapper>

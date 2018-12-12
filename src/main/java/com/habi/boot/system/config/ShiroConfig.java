@@ -28,15 +28,15 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Value("${spring.redis.shiro.host}")
+    @Value("${shiro.redis.host}")
     private String host;
-    @Value("${spring.redis.shiro.port}")
+    @Value("${shiro.redis.port}")
     private int port;
-    @Value("${spring.redis.shiro.timeout}")
+    @Value("${shiro.redis.timeout}")
     private int timeout;
-    @Value("${spring.redis.shiro.password}")
+    @Value("${shiro.redis.password}")
     private String password;
-    @Value("${spring.redis.shiro.database}")
+    @Value("${shiro.redis.database}")
     private int database;
 
     @Bean
@@ -69,6 +69,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/sys/role/*", "anon");
+        filterChainDefinitionMap.put("/test/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
         shiroFilterFactoryBean.setLoginUrl("/unauth");
@@ -207,9 +208,9 @@ public class ShiroConfig {
      * 注册全局异常处理
      * @return
      */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return new MyExceptionHandler();
-    }
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//        return new MyExceptionHandler();
+//    }
 }
 
