@@ -3,5 +3,7 @@
 <configuration>
     <settings>
         <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="safeResultHandlerEnabled" value="false"/>
     </settings>
 </configuration>

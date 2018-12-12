@@ -7,20 +7,18 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RedisBean {
-    @Bean(name = "sysUserCache")
+    @Bean(name = "sysUserGrougCache")
     public HashStringRedisCacheGroup functionCache(){
-        String[] groupField= new String[1];
-        String[] keyField=  new String[1];
-        groupField[0] = "userType";
-        keyField[0] = "userName";
-        HashStringRedisCacheGroup functionCache = new HashStringRedisCacheGroup();
-        functionCache.setName("function");
-        functionCache.setGroupField(groupField);
-        functionCache.setKeyField(keyField);
-        functionCache.setLoadOnStartUp(true);
-        functionCache.setType(SysUserEntity.class);
-        functionCache.setSqlId("com.habi.boot.system.auth.mapper.SysUserMapper.selectUserForCache");
-        return functionCache;
+        String[] groupFields= {"userType"};
+        String[] keyFields=  {"userName"};
+        HashStringRedisCacheGroup sysUserGrougCache = new HashStringRedisCacheGroup();
+        sysUserGrougCache.setName("sys_user");
+        sysUserGrougCache.setGroupField(groupFields);
+        sysUserGrougCache.setKeyField(keyFields);
+        sysUserGrougCache.setLoadOnStartUp(true);
+        sysUserGrougCache.setType(SysUserEntity.class);
+        sysUserGrougCache.setSqlId("com.habi.boot.system.auth.mapper.SysUserMapper.selectUserForCache");
+        return sysUserGrougCache;
     }
 
 }
