@@ -1,6 +1,6 @@
 package com.habi.boot.test.testcache.controllers;
 
-import com.habi.boot.system.auth.entity.SysFunctionEntity;
+
 import com.habi.boot.system.auth.entity.SysUserEntity;
 import com.habi.boot.system.auth.service.ISysUserService;
 import com.habi.boot.system.base.BaseController;
