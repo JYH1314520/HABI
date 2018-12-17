@@ -211,6 +211,11 @@
             <artifactId>protostuff-runtime</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
 
     </dependencies>
     <!-- 阿里云maven仓库 -->

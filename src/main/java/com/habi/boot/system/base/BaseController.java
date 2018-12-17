@@ -15,8 +15,11 @@ public class BaseController {
 
     protected IRequest createRequestContext(HttpServletRequest request) {
         String  userName = (String) SecurityUtils.getSubject().getPrincipal();
-        sysUserCache.setName("sys_user");
-        SysUserEntity sysUserEntity = sysUserCache.getValue(userName);
+        SysUserEntity sysUserEntity = null;
+        if(userName != null) {
+            sysUserCache.setName("sys_user");
+            sysUserEntity = sysUserCache.getValue(userName);
+        }
         return RequestHelper.createServiceRequest(request,sysUserEntity);
     }
 }

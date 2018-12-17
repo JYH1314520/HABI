@@ -52,6 +52,17 @@ public class SysLog extends BaseEntity {
      * 请求类型.方法
      */
 	private String classMethod;
+
+	/**
+	 * 操作提交头的数据
+	 */
+	private String requestHeader;
+
+
+	/**
+	 * 操作提交body的数据
+	 */
+	private String requestBody;
     /**
      * 操作提交的数据
      */
@@ -148,6 +159,22 @@ public class SysLog extends BaseEntity {
 
 	public void setClassMethod(String classMethod) {
 		this.classMethod = classMethod;
+	}
+
+	public String getRequestHeader() {
+		return requestHeader;
+	}
+
+	public void setRequestHeader(String requestHeader) {
+		this.requestHeader = requestHeader;
+	}
+
+	public String getRequestBody() {
+		return requestBody;
+	}
+
+	public void setRequestBody(String requestBody) {
+		this.requestBody = requestBody;
 	}
 
 	public String getParams() {
