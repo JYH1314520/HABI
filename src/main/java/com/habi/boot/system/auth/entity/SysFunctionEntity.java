@@ -5,12 +5,10 @@ import com.habi.boot.system.base.BaseEntity;
 import com.habi.boot.system.base.annotation.TableGeneratedValue;
 import com.habi.boot.system.config.DatabaseTypeConfig;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "sys_function")
+@Entity
 public class SysFunctionEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)

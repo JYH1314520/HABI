@@ -7,6 +7,7 @@ import com.habi.boot.system.config.DatabaseTypeConfig;
 import javax.persistence.*;
 
 @Table(name = "sys_user_role")
+@Entity
 public class SysUserRoleEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)

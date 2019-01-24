@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Table(name = "sys_role")
+@Entity
 public class SysRoleEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Table(name = "sys_role_function")
+@Entity
 public class SysRoleFunctionEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)

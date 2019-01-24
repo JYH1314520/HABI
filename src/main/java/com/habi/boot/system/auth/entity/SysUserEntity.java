@@ -14,6 +14,7 @@ import java.util.List;
 
 
 @Table(name = "sys_user")
+@Entity
 public class SysUserEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)

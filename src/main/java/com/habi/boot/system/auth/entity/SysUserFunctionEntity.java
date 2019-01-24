@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Table(name = "sys_user_function")
+@Entity
 public class SysUserFunctionEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
