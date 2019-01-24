@@ -26,8 +26,8 @@ public class TestController extends BaseController {
     @Autowired
     private ISysUserService sysUserService;
 
-    @Resource(name = "sysUserGrougCache")
-    private HashStringRedisCacheGroup cacheGroup;
+    @Resource(name = "sysUserCacheInit")
+    private HashStringRedisCache sysUserCacheInit;
 
 
     @RequestMapping(value = "/test1")
@@ -71,7 +71,7 @@ public class TestController extends BaseController {
 
     @RequestMapping(value = "/test6")
     public ResponseData test6(HttpServletRequest request) {
-        cacheGroup.init();
+        sysUserCacheInit.init();
         return  new ResponseData() ;
     }
 

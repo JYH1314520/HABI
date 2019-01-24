@@ -1,7 +1,7 @@
 package com.habi.boot.system.logs.aspect;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.habi.boot.system.auth.entity.SysUserEntity;
 import com.habi.boot.system.base.utils.ToolUtil;
 import com.habi.boot.system.logs.entity.SysLog;
 import com.habi.boot.system.logs.service.ISysLogService;
@@ -24,6 +24,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,8 +64,31 @@ public class SysLogAspect {
                 args[i] = o.toString();
             }
         }
-        String str = JSONObject.toJSONString(args);
-        sysLog.setParams(str.length()>5000?JSONObject.toJSONString("请求参数数据过长不与显示"):str);
+        //获取所有的请求参数
+        Enumeration<String> paraNames=request.getParameterNames();
+        JSONObject paraOject   = new JSONObject();
+        for(Enumeration<String> e=paraNames;e.hasMoreElements();){
+            String thisName=e.nextElement().toString();
+            String thisValue=request.getParameter(thisName);
+            paraOject.put(thisName,thisValue);
+            System.out.println("param的key:"+thisName+"--------------param的value:"+thisValue);
+        }
+        String requestBody = JSONObject.toJSONString(paraOject);
+        sysLog.setRequestBody(requestBody.length()>3000?requestBody.substring(0, 2999):requestBody);
+       //获取所有的头部参数
+        Enumeration<String> headerNames=request.getHeaderNames();
+        JSONObject headerObject  = new JSONObject();
+        for(Enumeration<String> e=headerNames;e.hasMoreElements();){
+            String thisName=e.nextElement().toString();
+            String thisValue=request.getHeader(thisName);
+            headerObject.put(thisName,thisValue);
+            System.out.println("header的key:"+thisName+"--------------header的value:"+thisValue);
+        }
+        String requestHeader = JSONObject.toJSONString(headerObject);
+        sysLog.setRequestHeader(requestHeader.length()>3000?requestHeader.substring(0, 2999):requestHeader);
+
+        String str = JSONObject.toJSONString(request.getParameterMap());
+        sysLog.setParams(str.length()>3000?requestHeader.substring(0, 2999):str);
         String ip = ToolUtil.getClientIp(request);
         if("0.0.0.0".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip) || "localhost".equals(ip) || "127.0.0.1".equals(ip)){
             ip = "127.0.0.1";
@@ -125,7 +150,7 @@ public class SysLogAspect {
             sysLog.setUsername("未登录用户");
         }
         String retString = JSONObject.toJSONString(ret);
-        sysLog.setResponse(retString.length()>5000?JSONObject.toJSONString("请求参数数据过长不与显示"):retString);
+        sysLog.setResponse(retString.length()>3000?retString.substring(0, 2999):retString);
         sysLog.setUseTime(System.currentTimeMillis() - startTime.get());
         sysLogService.insert(null,sysLog);
     }
