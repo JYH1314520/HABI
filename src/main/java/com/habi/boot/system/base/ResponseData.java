@@ -34,6 +34,11 @@ public class ResponseData {
         this.success = true;
         this.setSuccess(success);
     }
+    public ResponseData(boolean success,String message) {
+        this.success = true;
+        this.setSuccess(success);
+        this.setMessage(message);
+    }
 
     public ResponseData(List<?> list) {
         this(true);
