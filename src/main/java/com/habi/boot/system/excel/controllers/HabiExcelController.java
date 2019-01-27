@@ -47,7 +47,7 @@ public class HabiExcelController extends BaseController {
         IRequest requestContext = this.createRequestContext(request);
         JavaType type = this.objectMapper.getTypeFactory().constructParametrizedType(ExportConfig.class, ExportConfig.class, new Class[]{SysUserFunctionEntity.class, ColumnInfo.class});
         ExportConfig<SysUserFunctionEntity, ColumnInfo> exportConfig = (ExportConfig)this.objectMapper.readValue(config, type);
-        this.excelService.exportAndDownloadExcel("com.hand.hap.function.mapper.FunctionMapper.selectAll", exportConfig, request, httpServletResponse, requestContext);
+        this.excelService.exportAndDownloadExcel("com.habi.boot.system.auth.mapper.SysUserFunctionMapper.selectAll", exportConfig, request, httpServletResponse, requestContext);
     }
 
     @RequestMapping({"/export/template/{tableName}"})
