@@ -27,7 +27,7 @@ import tk.mybatis.mapper.mapperhelper.EntityHelper;
 
 @Service
 @Transactional
-public class HapExcelImportService implements IHabiExcelImportService {
+public class HabiExcelImportServiceImpl implements IHabiExcelImportService {
     @Autowired
     @Qualifier("dataSource")
     DataSource dataSource;
@@ -35,7 +35,7 @@ public class HapExcelImportService implements IHabiExcelImportService {
         return new DefaultRowStrategy(this.dataSource);
     });
 
-    public HapExcelImportService() {
+    public HabiExcelImportServiceImpl() {
     }
 
     public void loadExcel(InputStream inputStream, String tableName) throws ExcelException {
