@@ -5,8 +5,9 @@ import com.habi.boot.system.job.dto.SchedulerDto;
 
 import java.util.List;
 
+@org.apache.ibatis.annotations.Mapper
 public interface SchedulerMapper  extends Mapper<SchedulerDto> {
-    SchedulerDto selectByPrimaryKey(SchedulerDto var1);
+    SchedulerDto selectByMorePrimaryKey(SchedulerDto var1);
 
     List<SchedulerDto> selectSchedulers(SchedulerDto var1);
 }

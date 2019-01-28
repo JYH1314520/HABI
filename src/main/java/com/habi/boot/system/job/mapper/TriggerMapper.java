@@ -5,8 +5,9 @@ import com.habi.boot.system.job.dto.TriggerDto;
 
 import java.util.List;
 
+@org.apache.ibatis.annotations.Mapper
 public interface TriggerMapper extends Mapper<TriggerDto> {
-    TriggerDto selectByPrimaryKey(TriggerDto var1);
+    TriggerDto selectByMorePrimaryKey(TriggerDto var1);
 
     List<TriggerDto> selectTriggers(TriggerDto var1);
 }

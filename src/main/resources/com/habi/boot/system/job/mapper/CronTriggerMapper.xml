@@ -15,7 +15,7 @@
     <sql id="Base_Column_List">
         SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP, CRON_EXPRESSION, TIME_ZONE_ID
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.CronTriggerDto">
+    <select id="selectByMorePrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.CronTriggerDto">
         select
         <include refid="Base_Column_List"/>
         from qrtz_cron_triggers

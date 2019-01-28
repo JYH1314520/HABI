@@ -3,7 +3,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.habi.boot.system.job.mapper.JobRunningInfoDtoMapper">
-    <resultMap id="BaseResultMap" type="com.habi.boot.system.job.dto.JobRunningInfoDto" extends="com.hand.hap.mapper.StdMapper.STD">
+    <resultMap id="BaseResultMap" type="com.habi.boot.system.job.dto.JobRunningInfoDto" extends="com.habi.boot.system.base.stdmapper.StdMapper.STD">
         <id column="JOB_RUNNING_INFO_ID" property="jobRunningInfoId" jdbcType="DECIMAL" />
         <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR" />
         <result column="JOB_GROUP" property="jobGroup" jdbcType="VARCHAR" />

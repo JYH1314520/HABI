@@ -2,9 +2,12 @@ package com.habi.boot.system.job.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.habi.boot.system.base.BaseEntity;
+import com.habi.boot.system.base.annotation.TableGeneratedValue;
+import com.habi.boot.system.config.DatabaseTypeConfig;
 
 import java.util.Date;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,9 +17,8 @@ import javax.persistence.Table;
 public class JobRunningInfoDto extends BaseEntity {
     private static final long serialVersionUID = -6714732735643965630L;
     @Id
-    @GeneratedValue(
-            generator = "IDENTITY"
-    )
+    @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long jobRunningInfoId;
 
     private String jobName;

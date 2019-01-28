@@ -16,7 +16,7 @@
     <sql id="Base_Column_List">
         SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP, REPEAT_COUNT, REPEAT_INTERVAL, TIMES_TRIGGERED
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.SimpleTriggerDto">
+    <select id="selectMoreByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.SimpleTriggerDto">
         select
         <include refid="Base_Column_List"/>
         from qrtz_simple_triggers

@@ -39,7 +39,7 @@
         IS_NONCONCURRENT,
         IS_UPDATE_DATA, REQUESTS_RECOVERY
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+    <select id="selectMoreByPrimaryKey" resultMap="BaseResultMap"
         parameterType="com.habi.boot.system.job.dto.JobDetailDto">
         select
         <include refid="Base_Column_List" />

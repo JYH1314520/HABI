@@ -17,8 +17,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
@@ -43,14 +43,14 @@ public class ExportServiceImpl implements IExportService {
     }
 
     private void exportExcel(String sqlId, ExportConfig gridInfo, IRequest iRequest, OutputStream outputStream, int rowMaxNumber) throws IOException {
-        SXSSFWorkbook wb = new SXSSFWorkbook(50);
-        CellStyle dateFormat = wb.createCellStyle();
-        dateFormat.setDataFormat(wb.createDataFormat().getFormat("yyyy-MM-DD HH:mm:ss"));
+        SXSSFWorkbook wxb = new SXSSFWorkbook(50);
+        CellStyle dateFormat = wxb.createCellStyle();
+        dateFormat.setDataFormat(wxb.createDataFormat().getFormat("yyyy-MM-DD HH:mm:ss"));
         AtomicInteger count = new AtomicInteger(1);
         AtomicInteger rowIndex = new AtomicInteger(1);
         this.initColumnType(gridInfo.getColumnsInfo(), gridInfo.getParam());
-        SXSSFSheet[] sheet = new SXSSFSheet[]{(SXSSFSheet) wb.createSheet()};
-        this.createHeaderRow(gridInfo.getColumnsInfo(), wb, sheet[0]);
+        SXSSFSheet[] sheet = new SXSSFSheet[]{(SXSSFSheet) wxb.createSheet()};
+        this.createHeaderRow(gridInfo.getColumnsInfo(), wxb, sheet[0]);
 
         try {
             SqlSession sqlSession = this.sqlSessionFactory.openSession();
@@ -59,9 +59,9 @@ public class ExportServiceImpl implements IExportService {
             try {
                 sqlSession.select(sqlId, gridInfo.getParam(), (resultContext) -> {
                     Object object = resultContext.getResultObject();
-                    sheet[0] = this.createSheet(wb, sheet[0], object, count, rowIndex, rowMaxNumber, gridInfo, dateFormat);
+                    sheet[0] = this.createSheet(wxb, sheet[0], object, count, rowIndex, rowMaxNumber, gridInfo, dateFormat);
                 });
-                wb.write(outputStream);
+                wxb.write(outputStream);
             } catch (Throwable var28) {
                 var12 = var28;
                 throw var28;
@@ -80,8 +80,8 @@ public class ExportServiceImpl implements IExportService {
 
             }
         } finally {
-            wb.close();
-            wb.dispose();
+            //wxb.close();
+            wxb.dispose();
         }
 
     }
@@ -112,7 +112,7 @@ public class ExportServiceImpl implements IExportService {
             String type = ((ColumnInfo)columnInfos.get(ii)).getType();
             SXSSFCell cell = (SXSSFCell) row.createCell(ii);
             if (null == fieldObject) {
-                cell.setCellType(CellType.STRING);
+                cell.setCellType(Cell.CELL_TYPE_STRING);
                 cell.setCellValue((String)null);
             } else {
                 String var9 = type.toUpperCase();
@@ -162,17 +162,17 @@ public class ExportServiceImpl implements IExportService {
                 switch(var10) {
                     case 0:
                     case 1:
-                        cell.setCellType(CellType.NUMERIC);
+                        cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                         cell.setCellValue((double)(Float)fieldObject);
                         break;
                     case 2:
-                        cell.setCellType(CellType.NUMERIC);
+                        cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                         cell.setCellValue((Double)fieldObject);
                         break;
                     case 3:
                     case 4:
                     case 5:
-                        cell.setCellType(CellType.NUMERIC);
+                        cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                         cell.setCellValue((double)(Long)fieldObject);
                         break;
                     case 6:
@@ -180,11 +180,11 @@ public class ExportServiceImpl implements IExportService {
                         cell.setCellValue((Date)fieldObject);
                         break;
                     case 7:
-                        cell.setCellType(CellType.BOOLEAN);
+                        cell.setCellType(Cell.CELL_TYPE_BOOLEAN);
                         cell.setCellValue((Boolean)fieldObject);
                         break;
                     default:
-                        cell.setCellType(CellType.STRING);
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
                         cell.setCellValue((String)fieldObject);
                 }
             }

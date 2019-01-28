@@ -30,7 +30,7 @@
     <sql id="Blob_Column_List">
         JOB_DATA
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.TriggerDto">
+    <select id="selectMoreByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.TriggerDto">
         select
         <include refid="Base_Column_List"/>
         from qrtz_triggers

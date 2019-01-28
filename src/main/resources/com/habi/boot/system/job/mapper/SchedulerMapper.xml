@@ -14,7 +14,7 @@
     <sql id="Base_Column_List">
         SCHED_NAME, INSTANCE_NAME, LAST_CHECKIN_TIME, CHECKIN_INTERVAL
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.SchedulerDto">
+    <select id="selectMoreByPrimaryKey" resultMap="BaseResultMap" parameterType="com.habi.boot.system.job.dto.SchedulerDto">
         select
         <include refid="Base_Column_List"/>
         from qrtz_scheduler_state
