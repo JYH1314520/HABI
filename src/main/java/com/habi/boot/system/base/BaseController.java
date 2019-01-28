@@ -5,6 +5,7 @@ import com.habi.boot.system.auth.entity.SysUserEntity;
 import com.habi.boot.system.base.cache.impl.SysUserCache;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 public class BaseController {
     @Autowired
     private SysUserCache sysUserCache;
+    @Autowired
+    private Validator validator;
 
     protected IRequest createRequestContext(HttpServletRequest request) {
         String  userName = (String) SecurityUtils.getSubject().getPrincipal();
@@ -21,5 +24,9 @@ public class BaseController {
             sysUserEntity = sysUserCache.getValue(userName);
         }
         return RequestHelper.createServiceRequest(request,sysUserEntity);
+    }
+
+    protected Validator getValidator() {
+        return this.validator;
     }
 }
