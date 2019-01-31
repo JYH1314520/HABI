@@ -23,11 +23,12 @@ import javax.servlet.http.HttpSession;
 import static com.alibaba.druid.util.Utils.md5;
 
 @RestController
+@RequestMapping("/api")
 public class LoginController extends BaseController {
     @Autowired
     private ISysUserService sysUserService;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public ResponseData login(HttpServletRequest request, @RequestParam("userName") String userName, @RequestParam("password") String password) {
        // UsernamePasswordToken token = new UsernamePasswordToken(userName, password,request.getRemoteAddr());
         String md5password = md5(password);
@@ -69,6 +70,8 @@ public class LoginController extends BaseController {
         responseData.setSuccess(true);
         responseData.setCode("200");
         responseData.setSessionId(sessionId);
+        responseData.setMessage("登录成功");
+        responseData.setUser(sysUserEntity);
         return responseData;
     }
 

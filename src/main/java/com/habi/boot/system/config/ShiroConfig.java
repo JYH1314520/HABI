@@ -63,11 +63,11 @@ public class ShiroConfig {
          * member （用户方面）  org.apache.shiro.web.filter.authc.UserFilter
          * user  表示用户不一定已通过认证,只要曾被Shiro记住过登录状态的用户就可以正常发起请求,比如rememberMe
          */
-        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/api/logout", "logout");
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/api/login", "anon");
         filterChainDefinitionMap.put("/test/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据

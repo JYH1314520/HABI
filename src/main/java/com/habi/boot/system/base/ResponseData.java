@@ -3,6 +3,8 @@ package com.habi.boot.system.base;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.github.pagehelper.Page;
+import com.habi.boot.system.auth.entity.SysUserEntity;
+
 import java.util.List;
 
 public class ResponseData {
@@ -17,6 +19,8 @@ public class ResponseData {
     private Long total;
     @JsonInclude(Include.NON_NULL)
     private String sessionId;
+    @JsonInclude(Include.NON_NULL)
+    private SysUserEntity user;
 
     public String getSessionId() {
         return sessionId;
@@ -89,6 +93,14 @@ public class ResponseData {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public SysUserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(SysUserEntity user) {
+        this.user = user;
     }
 }
 
