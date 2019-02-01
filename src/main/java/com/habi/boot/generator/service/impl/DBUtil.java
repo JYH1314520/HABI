@@ -21,14 +21,14 @@ public class DBUtil {
         return sqlSession.getConfiguration().getEnvironment().getDataSource().getConnection();
     }
 
-    public static List<String> showAllTables(Connection conn) throws SQLException {
-        List<String> tables = new ArrayList();
+    public static List<ListValue> showAllTables(Connection conn) throws SQLException {
+        List<ListValue> tables = new ArrayList();
         DatabaseMetaData dbmd = conn.getMetaData();
         String database = conn.getCatalog();
         ResultSet rs = dbmd.getTables(database, (String)null, (String)null, new String[]{"TABLE"});
 
         while(rs.next()) {
-            tables.add(rs.getString("TABLE_NAME"));
+            tables.add(new ListValue( rs.getString("TABLE_NAME"),rs.getString("TABLE_NAME")));
         }
 
         return tables;

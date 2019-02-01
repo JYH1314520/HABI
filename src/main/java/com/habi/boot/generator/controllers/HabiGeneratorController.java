@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping({"/generator"})
+@RequestMapping({"/api/generator"})
 public class HabiGeneratorController extends BaseController {
     @Autowired
     IHabiGeneratorService iHabiGeneratorService;

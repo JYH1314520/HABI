@@ -8,19 +8,22 @@ import com.habi.boot.system.base.IRequest;
 import com.habi.boot.system.base.ResponseData;
 import com.habi.boot.system.logs.annotation.SysLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
-@RequestMapping("/sys/role")
+@RequestMapping("/api/sys/role")
 @RestController
 public class SysRoleController extends BaseController {
    @Autowired
    private ISysRoleService sysRoleService;
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
+
 
     @RequestMapping("/select")
     @SysLog("角色查询")
@@ -28,27 +31,26 @@ public class SysRoleController extends BaseController {
         return  new ResponseData(sysRoleService.findAll()) ;
     };
 
-    @RequestMapping("/insert")
-    @SysLog("角色插入")
-    public ResponseData insert(HttpServletRequest request){
-        IRequest requestContext = this.createRequestContext(request);
-         SysRoleEntity sysRoleEntity =  new SysRoleEntity();
-        sysRoleEntity.setRoleCode("223333");
-       // sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
-        sysRoleEntity.setRoleName("233333");
-        sysRoleService.insert(requestContext,sysRoleEntity );
-        return  new ResponseData() ;
-    };
-    @RequestMapping("/upate")
-    @SysLog("角色更新")
-    public ResponseData upate(HttpServletRequest request){
-        IRequest requestContext = this.createRequestContext(request);
-        SysRoleEntity sysRoleEntity =  new SysRoleEntity();
-        sysRoleEntity.setRoleId(Integer.valueOf(1).longValue());
-        sysRoleEntity.setRoleCode("223333");
-        // sysRoleEntity.setRoleId(Integer.valueOf(2333333).longValue());
-        sysRoleEntity.setRoleName("nihoa");
-        sysRoleService.updateByPrimaryKey(requestContext,sysRoleEntity );
-        return  new ResponseData() ;
-    };
+
+
+    @RequestMapping({"/submit"})
+    @ResponseBody
+    public ResponseData update(@RequestBody List<SysRoleEntity> dto, BindingResult result, HttpServletRequest request) {
+        this.getValidator().validate(dto, result);
+        if (result.hasErrors()) {
+            ResponseData responseData = new ResponseData(false);
+            responseData.setMessage("数据格式错误！");
+            return responseData;
+        } else {
+            IRequest requestCtx = this.createRequestContext(request);
+            return new ResponseData(this.sysRoleService.batchUpdate(requestCtx, dto));
+        }
+    }
+
+    @RequestMapping({"/remove"})
+    @ResponseBody
+    public ResponseData delete(HttpServletRequest request, @RequestBody List<SysRoleEntity> dto) {
+        this.sysRoleService.batchDelete(dto);
+        return new ResponseData();
+    }
 }

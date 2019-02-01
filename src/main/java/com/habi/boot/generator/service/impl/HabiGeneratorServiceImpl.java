@@ -32,7 +32,7 @@ public class HabiGeneratorServiceImpl implements IHabiGeneratorService {
     public HabiGeneratorServiceImpl() {
     }
 
-    public List<String> showTables() {
+    public List<ListValue> showTables() {
         try {
             SqlSession sqlSession = this.sqlSessionFactory.openSession();
             Throwable var2 = null;
@@ -40,7 +40,7 @@ public class HabiGeneratorServiceImpl implements IHabiGeneratorService {
             List var5;
             try {
                 Connection conn = DBUtil.getConnectionBySqlSession(sqlSession);
-                List<String> tables = DBUtil.showAllTables(conn);
+                List<ListValue> tables = DBUtil.showAllTables(conn);
                 conn.close();
                 var5 = tables;
             } catch (Throwable var15) {
