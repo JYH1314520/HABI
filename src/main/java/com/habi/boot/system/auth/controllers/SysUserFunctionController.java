@@ -31,7 +31,7 @@ public class SysUserFunctionController  extends BaseController {
 
     @RequestMapping({"/function"})
     @ResponseBody
-    public ResponseData delete(HttpServletRequest request,  @RequestParam("userName") String userName) {
+    public ResponseData select(HttpServletRequest request,  @RequestParam("userName") String userName) {
         SysUserEntity  sysUserEntity = iSysUserService.selectByUserName(userName);
         if ( "Y".equals(sysUserEntity.getUserpermissionflag())){
             return new ResponseData(iSysUserFunctionService.findByUserName(userName));
