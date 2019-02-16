@@ -106,10 +106,10 @@ public class HabiGeneratorServiceImpl implements IHabiGeneratorService {
                     dbTable.setMultiLanguage(multiLanguage);
                     multiColumns = DBUtil.isMultiLanguageColumn(tableName, dbmd);
                 }
-
-                String columnPk = DBUtil.getPrimaryKey(tableName, dbmd);
+                String columnPk = DBUtil.getPrimaryKey(conn,tableName, dbmd);
                 NotNullColumns = DBUtil.getNotNullColumn(tableName, dbmd);
-                ResultSet rs1 = DBUtil.getTableColumnInfo(tableName, dbmd);
+                ResultSet rs1 = dbmd.getColumns(conn.getCatalog(), conn.getCatalog(), tableName, null);
+                //ResultSet rs1 = DBUtil.getTableColumnInfo(tableName, dbmd);
 
                 while(rs1.next()) {
                     String columnName = rs1.getString("COLUMN_NAME");

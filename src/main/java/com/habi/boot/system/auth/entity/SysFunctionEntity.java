@@ -13,29 +13,31 @@ public class SysFunctionEntity extends BaseEntity {
     @Id
     @TableGeneratedValue(databaseType = DatabaseTypeConfig.databaseType)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long funcitonId;
-
+    @Column(name = "FUNCTION_ID")
+    private Long functionId;
+    @Column(name = "FUNCTION_CODE")
     private String functionCode;
 
+    @Column(name = "FUNCTION_TYPE")
     private String functionType;
-
+    @Column(name = "FUNCTION_DESCRIPTION")
     private String functionDescription;
-
+    @Column(name = "FUNCTION_ICON")
     private String functionIcon;
-
+    @Column(name = "FUNCTION_SEQUENCE")
     private Long functionSequence;
-
+    @Column(name = "FUNCTION_NAME")
     private String functionName;
-
+    @Column(name = "MODULE_CODE")
     private String moduleCode;
 
-
+    @Column(name = "PARENT_FUNCTION_ID")
     private Long parentFunctionId;
-
+    @Column(name = "RESOURCE_NAME")
     private String resourceName;
-
+    @Column(name = "RESOURCE_ID")
     private Long resourceId;
-
+    @Column(name = "LANG")
     private String lang;
 
     public String getLang() {
@@ -55,11 +57,11 @@ public class SysFunctionEntity extends BaseEntity {
     }
 
     public Long getFuncitonId() {
-        return funcitonId;
+        return functionId;
     }
 
-    public void setFuncitonId(Long funcitonId) {
-        this.funcitonId = funcitonId;
+    public void setFuncitonId(Long functionId) {
+        this.functionId = functionId;
     }
 
     public String getFunctionCode() {

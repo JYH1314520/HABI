@@ -38,6 +38,8 @@ public class DBUtil {
         return dbmd.getColumns((String)null, (String)null, table, (String)null);
     }
 
+
+
     public static boolean isMultiLanguageTable(String table) throws SQLException {
         boolean result = false;
         if (table.toUpperCase().endsWith("_B")) {
@@ -86,6 +88,16 @@ public class DBUtil {
         String columnPK = null;
 
         for(ResultSet rs = dbmd.getPrimaryKeys((String)null, (String)null, table); rs.next(); columnPK = rs.getString("COLUMN_NAME")) {
+            ;
+        }
+
+        return columnPK;
+    }
+
+    public static String getPrimaryKey(Connection conn,String table, DatabaseMetaData dbmd) throws SQLException {
+        String columnPK = null;
+
+        for(ResultSet rs = dbmd.getPrimaryKeys((String)conn.getCatalog(), (String)conn.getCatalog(), table); rs.next(); columnPK = rs.getString("COLUMN_NAME")) {
             ;
         }
 
