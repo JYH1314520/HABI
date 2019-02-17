@@ -40,6 +40,17 @@ public class SysFunctionEntity extends BaseEntity {
     @Column(name = "LANG")
     private String lang;
 
+    @Transient
+    private  Resource resource;
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
     public String getLang() {
         return lang;
     }

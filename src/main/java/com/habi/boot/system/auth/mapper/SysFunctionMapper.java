@@ -8,5 +8,5 @@ import com.habi.boot.system.base.mapper.Mapper;
 
 @org.apache.ibatis.annotations.Mapper
 public interface SysFunctionMapper extends Mapper<SysFunctionEntity> {
-
+    SysFunctionEntity  selectBYfunctionId(Long functionId);
 }

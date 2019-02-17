@@ -3,8 +3,8 @@
 <mapper namespace="com.habi.boot.system.auth.mapper.SysRoleFunctionMapper">
     <resultMap id="BaseResultMap" type="com.habi.boot.system.auth.entity.SysRoleFunctionEntity" extends="com.habi.boot.system.base.stdmapper.StdMapper.STD">
         <id column="ROLE_FUNCTION_ID" property="roleFuncitonId" jdbcType="DECIMAL" />
-        <id column="FUNCTION_ID" property="functionId" jdbcType="DECIMAL" />
-        <id column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+        <result column="FUNCTION_ID" property="functionId" jdbcType="DECIMAL" />
+        <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
     </resultMap>
     <select id="findByRoleCode" resultMap="BaseResultMap"      parameterType="java.lang.String">
            select srf.role_funciton_id as ROLE_FUNCTION_ID,

@@ -23,7 +23,7 @@ public class SysRoleFunctionServiceImpl extends BaseServiceImpl<SysRoleFunctionE
    public List<SysRoleFunctionEntity> findByRoleCode(String roleCode) {
         List<SysRoleFunctionEntity> list = sysRoleFunctionMapper.findByRoleCode(roleCode);
         for(SysRoleFunctionEntity sysRoleFunctionEntity :list){
-            SysFunctionEntity sysFunctionEntity = sysFunctionMapper.selectByPrimaryKey(sysRoleFunctionEntity.getFunctionId());
+            SysFunctionEntity sysFunctionEntity = sysFunctionMapper.selectBYfunctionId(sysRoleFunctionEntity.getFunctionId());
             sysRoleFunctionEntity.setSysFunction(sysFunctionEntity);
         }
         return list;
