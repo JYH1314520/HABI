@@ -59,16 +59,15 @@ public class MyShiroRealm extends AuthorizingRealm {
          List<SysUserFunctionEntity>  sysUserFunctionEntityList =  sysUserFunctionService.findByUserName(username);
          for (SysUserFunctionEntity sysUserFunctionEntity :sysUserFunctionEntityList){
              SysFunctionEntity sysFunctionEntity = sysUserFunctionEntity.getSysFunction();
-             permissionNames.add(sysFunctionEntity.getResourceName());
+             permissionNames.add(sysFunctionEntity.getResource().getUrl());
          }
         }else{
-            for (String role : roleCodes) {
-                List<SysRoleFunctionEntity>  sysRoleFunctionEntityList =  sysRoleFunctionService.findByRoleCode(role);
+                List<SysRoleFunctionEntity>  sysRoleFunctionEntityList =  sysRoleFunctionService.findByRoleCode(roleCodes);
                 for (SysRoleFunctionEntity sysRoleFunctionEntity :sysRoleFunctionEntityList){
                     SysFunctionEntity sysFunctionEntity = sysRoleFunctionEntity.getSysFunction();
-                    permissionNames.add(sysFunctionEntity.getResourceName());
+                    permissionNames.add(sysFunctionEntity.getResource().getUrl());
                 }
-            }
+
 
         }
 

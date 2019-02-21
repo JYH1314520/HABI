@@ -6,6 +6,7 @@ import com.habi.boot.system.base.annotation.TableGeneratedValue;
 import com.habi.boot.system.config.DatabaseTypeConfig;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "sys_function")
 @Entity
@@ -42,6 +43,17 @@ public class SysFunctionEntity extends BaseEntity {
 
     @Transient
     private  Resource resource;
+
+    @Transient
+    private List<SysFunctionEntity> children;
+
+    public List<SysFunctionEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysFunctionEntity> children) {
+        this.children = children;
+    }
 
     public Resource getResource() {
         return resource;

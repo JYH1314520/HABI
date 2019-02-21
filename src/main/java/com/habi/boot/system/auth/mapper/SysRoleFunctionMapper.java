@@ -9,5 +9,5 @@ import java.util.List;
 
 @org.apache.ibatis.annotations.Mapper
 public interface SysRoleFunctionMapper extends Mapper<SysRoleFunctionEntity> {
-     List<SysRoleFunctionEntity> findByRoleCode(String roleCode) ;
+     List<SysRoleFunctionEntity> findByRoleCode(List<String> roleCodes) ;
 }

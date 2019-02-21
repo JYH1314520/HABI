@@ -360,9 +360,9 @@ public class FileUtil {
             }
 
             url = url.replaceAll("_", "/");
-            map.put("queryUrl", "/" + url + "/query");
-            map.put("submitUrl", "/" + url + "/submit");
-            map.put("removeUrl", "/" + url + "/remove");
+            map.put("queryUrl", "/api/" + url + "/query");
+            map.put("submitUrl", "/api/" + url + "/submit");
+            map.put("removeUrl", "/api/" + url + "/remove");
             template.process(map, new OutputStreamWriter(out));
             out.flush();
             out.close();

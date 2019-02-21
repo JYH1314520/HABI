@@ -16,10 +16,22 @@
         <result column="LANG" property="lang" jdbcType="VARCHAR" />
         <association property="resource" column="RESOURCE_ID"
                      select="com.habi.boot.system.auth.mapper.ResourceMapper.selectByPrimaryKey"></association>
+        <association property="children"  column="{functionId=FUNCTION_ID,roleId=ROLE_ID}"
+                     select="selectByParentFunctionIdRoleId"></association>
 
     </resultMap>
-    <select id="selectBYfunctionId"  resultMap="BaseResultMap"    parameterType="java.lang.Long">
-      select sf.* from sys_function sf
-    where  sf.FUNCTION_ID = #{function_id,jdbcType=DECIMAL}
+    <select id="selectByFunctionIdRoleId"  resultMap="BaseResultMap"    parameterType="com.habi.boot.system.auth.entity.SysRoleFunctionEntity">
+      select sf.* ,srf.ROLE_ID from sys_function sf,
+                        sys_role_function  srf
+    where  sf.FUNCTION_ID = #{functionId,jdbcType=DECIMAL} and
+           srf.FUNCTION_ID = sf.FUNCTION_ID and
+           srf.ROLE_ID    = #{roleId,jdbcType=DECIMAL}
+    </select>
+    <select id="selectByParentFunctionIdRoleId"  resultMap="BaseResultMap"    parameterType="java.util.HashMap">
+      select sf.* ,srf.ROLE_ID from sys_function sf,
+                        sys_role_function  srf
+    where  sf.PARENT_FUNCTION_ID = #{functionId,jdbcType=DECIMAL} and
+           srf.FUNCTION_ID = sf.FUNCTION_ID and
+           srf.ROLE_ID    = #{roleId,jdbcType=DECIMAL}
     </select>
 </mapper>

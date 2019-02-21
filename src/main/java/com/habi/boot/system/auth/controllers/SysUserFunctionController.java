@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -43,12 +44,13 @@ public class SysUserFunctionController  extends BaseController {
         }else{
             List<String>  Syscodes = sysUserEntity.getRoleCode();
             List<SysFunctionEntity> SysFunctionEntityAll = new ArrayList<SysFunctionEntity>();
-            for(String syscode : Syscodes){
-                List<SysRoleFunctionEntity>  sysRoleFunctionEntityList = iSysRoleFunctionService.findByRoleCode(syscode) ;
-                for (SysRoleFunctionEntity sysRoleFunctionEntity : sysRoleFunctionEntityList){
+
+            List<SysRoleFunctionEntity>  sysRoleFunctionEntityList = iSysRoleFunctionService.findByRoleCode(Syscodes) ;
+            Iterator<SysRoleFunctionEntity> SysRoleFunctionEntitys = sysRoleFunctionEntityList.iterator();
+            while (SysRoleFunctionEntitys.hasNext()) {
+                    SysRoleFunctionEntity sysRoleFunctionEntity = SysRoleFunctionEntitys.next();
                     SysFunctionEntity sysFunctionEntity = sysRoleFunctionEntity.getSysFunction();
                     SysFunctionEntityAll.add(sysFunctionEntity);
-                }
             }
             if(SysFunctionEntityAll == null){
                 return new ResponseData();

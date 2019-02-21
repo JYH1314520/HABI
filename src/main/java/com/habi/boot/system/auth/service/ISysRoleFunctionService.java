@@ -8,5 +8,5 @@ import java.util.List;
 
 
 public interface ISysRoleFunctionService extends IBaseService<SysRoleFunctionEntity>, ProxySelf<ISysRoleFunctionService> {
-    public List<SysRoleFunctionEntity> findByRoleCode(String roleCode);
+    public List<SysRoleFunctionEntity> findByRoleCode(List<String> roleCodes);
 }
