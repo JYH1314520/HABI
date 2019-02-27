@@ -13,10 +13,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,9 +26,11 @@ public class LoginController extends BaseController {
     @Autowired
     private ISysUserService sysUserService;
 
-    @RequestMapping("/login")
-    public ResponseData login(HttpServletRequest request, @RequestParam("userName") String userName, @RequestParam("password") String password) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseData login(HttpServletRequest request,@RequestBody SysUserEntity sysUserEntity) {
        // UsernamePasswordToken token = new UsernamePasswordToken(userName, password,request.getRemoteAddr());
+        String  userName = sysUserEntity.getUserName();
+        String  password = sysUserEntity.getPassword();
         String md5password = md5(password);
         UsernamePasswordToken token = new UsernamePasswordToken(userName, md5password);
        // 后面参数含义：密码，盐，加密次数(两次代表：md5(md5())安全性更高)
@@ -62,16 +62,16 @@ public class LoginController extends BaseController {
             responseData.setMessage("times error!");
             return responseData;
         }
-        SysUserEntity sysUserEntity = sysUserService.selectByUserName(userName);
-        subject.getSession().setAttribute("user", sysUserEntity);
-        request.getSession().setAttribute("user",sysUserEntity);
+        SysUserEntity sysUserEntity1 = sysUserService.selectByUserName(userName);
+        subject.getSession().setAttribute("user", sysUserEntity1);
+        request.getSession().setAttribute("user",sysUserEntity1);
         String sessionId = (String) subject.getSession().getId();
         ResponseData responseData =   new ResponseData();
         responseData.setSuccess(true);
         responseData.setCode("200");
         responseData.setSessionId(sessionId);
         responseData.setMessage("登录成功");
-        responseData.setUser(sysUserEntity);
+        responseData.setUser(sysUserEntity1);
         return responseData;
     }
 
